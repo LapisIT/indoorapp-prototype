@@ -1,3 +1,8 @@
 .idea
-platforms
+
+platforms/android/build
+platforms/android/CordovaLib/build
+platforms/android/cordova/node_modules
+
+
 plugins
