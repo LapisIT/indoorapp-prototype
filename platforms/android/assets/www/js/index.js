@@ -36,7 +36,7 @@ var app = {
         app.receivedEvent('deviceready');
 
        indooratlas.echo(
-           'Plugin Ready!',
+           'Plugin Ready!!',
            function(msg) {
              document
                .getElementById('deviceready')
@@ -50,7 +50,7 @@ var app = {
            }
        );
        indooratlas.echojs(
-           'Hello Plugin',
+           'ello Plugin!!!',
            function(msg) {
              document.getElementsByTagName('h1')[0].innerHTML = msg;
            },
@@ -69,7 +69,29 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+
+        // Enable to debug issues.
+        window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+
+        window.plugins.OneSignal.init( "3d83bf15-b466-48f6-a36c-146c1c91ea5e",
+                                        {googleProjectNumber: "937454628774"},
+                                        app.didReceiveRemoteNotificationCallBack);
+
+    },
+    didReceiveRemoteNotificationCallBack : function(jsonData) {
+        alert("Notification received:\n" + JSON.stringify(jsonData));
+        console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
     }
 };
+function sendTag() {
+    window.plugins.OneSignal.sendTag("PhoneGapKey", "PhoneGapValue");
+}
+function getIds() {
+    window.plugins.OneSignal.getIds(function(ids) {
+        document.getElementById("OneSignalUserId").innerHTML = "UserId: " + ids.userId;
+        document.getElementById("OneSignalPushToken").innerHTML = "PushToken: " + ids.pushToken;
+        console.log('getIds: ' + JSON.stringify(ids));
+    });
+}
 
 app.initialize();

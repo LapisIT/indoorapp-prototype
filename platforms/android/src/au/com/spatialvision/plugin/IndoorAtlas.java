@@ -25,6 +25,20 @@ public class IndoorAtlas extends CordovaPlugin {
   public static String TAG = "IndoorAtlas";
 
   private IALocationManager mIALocationManager;
+  private IALocationListener mLocationListener = new IALocationListenerSupport() {
+    @Override
+    public void onLocationChanged(IALocation location) {
+      String msg = "location is: " + location.getLatitude() + "," + location.getLongitude();
+      Log.d(TAG, msg);
+
+//            Toast.makeText(
+//                    webView.getContext(),
+//                    msg,
+//                    Toast.LENGTH_LONG
+//            ).show();
+
+    }
+  };
 
   /**
    * Sets the context of the Command. This can then be used to do things like
@@ -38,11 +52,13 @@ public class IndoorAtlas extends CordovaPlugin {
     super.initialize(cordova, webView);
     Log.i(TAG, "initializing location manager");
 
-    Context context=this.cordova.getActivity().getApplicationContext();
+    final Context context=this.cordova.getActivity().getApplicationContext();
 
     cordova.getActivity().runOnUiThread(new Runnable() {
       @Override
       public void run() {
+        mIALocationManager = IALocationManager.create(context);
+        mIALocationManager.requestLocationUpdates(IALocationRequest.create(), mLocationListener);
         //Context context = cordova.getActivity().getApplicationContext();
         //Intent intent = new Intent(context, MyNewActivityGap.class);
         //cordova.getActivity().startActivity(intent);
@@ -89,7 +105,7 @@ public class IndoorAtlas extends CordovaPlugin {
   @Override
   public void onDestroy() {
     super.onDestroy();
-    mIALocationManager.destroy();
+    //mIALocationManager.destroy();
   }
 
 }

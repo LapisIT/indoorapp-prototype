@@ -57,8 +57,8 @@ public class MainActivity extends CordovaActivity
         super.onCreate(savedInstanceState);
         // Set by <content src="index.html" /> in config.xml
         loadUrl(launchUrl);
-        mIALocationManager = IALocationManager.create(this);
-        mIALocationManager.requestLocationUpdates(IALocationRequest.create(), mLocationListener);
+        //mIALocationManager = IALocationManager.create(this);
+        //mIALocationManager.requestLocationUpdates(IALocationRequest.create(), mLocationListener);
 
         runOnUiThread(new Runnable() {
           @Override

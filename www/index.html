@@ -43,22 +43,26 @@
                 <p class="event listening">Connecting to Device...</p>
                 <p class="event received">Device is Ready!!!</p>
             </div>
+
+            <br>
+            <br>
+            <h1>OneSignal Example</h1>
+            <form>
+                <input type="button" value="Send Tag" id="sendTag" style="width:150px;height:40px;"/>
+                <br>
+                <input type="button" value="Get Ids"  id="getIds" style="width:150px;height:40px;"/>
+            </form>
+            <p id="OneSignalUserId"></p>
+            <p style="word-break: break-all;" id="OneSignalPushToken"></p>
         </div>
 
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/OneSignal.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-
-        <br>
-        <br>
-        <h1>OneSignal Example</h1>
-        <form>
-            <input type="button" value="Send Tag" onclick="sendTag()" />
-            <br>
-            <input type="button" value="Get Ids" onclick="getIds()" />
-        </form>
-        <p id="OneSignalUserId"></p>
-        <p style="word-break: break-all;" id="OneSignalPushToken"></p>
+        <script type="text/javascript">
+            document.getElementById("sendTag").addEventListener("click", sendTag);
+            document.getElementById("getIds").addEventListener("click", getIds);
+        </script>
 
     </body>
 </html>
